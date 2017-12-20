@@ -1,0 +1,88 @@
+<md-content layout-fill="" class="signup-component" layout="column" layout-align="start center" layout-padding>
+  <a ui-sref="app" href="" class="signup-logo"><img src="/images/logo.png" alt=""></a>
+  <div class="signup-form" layout-padding="" md-whiteframe="2">
+    <form name="signupForm" layout="column" ng-submit="$ctrl.process(signupForm)">
+      <ul ng-if="$ctrl.errors" class="errors">
+        <li ng-repeat="(k,error) in $ctrl.errors">
+          <div ng-switch="k">
+            <span ng-switch-default>{{k}} {{error[0]}}</span>
+            <span ng-switch-when="facebook_id">Account with this facebook id already registered</span>
+          </div>
+        </li>
+      </ul>
+      <div layout="row" layout-wrap layout-align="space-between">
+        <md-input-container flex="50" class="mobile-input">
+          <label>{{'name'|translate}}</label>
+          <input name="name" ng-model="$ctrl.data.name" required>
+          <div ng-messages="signupForm.name.$error">
+            <div ng-messages-include="my-custom-messages"></div>
+          </div>
+        </md-input-container>
+        <md-input-container flex="50" class="mobile-input">
+          <label>{{'surname'|translate}}</label>
+          <input name="surname" ng-model="$ctrl.data.surname" required>
+          <div ng-messages="signupForm.surname.$error">
+            <div ng-messages-include="my-custom-messages"></div>
+          </div>
+        </md-input-container>
+        <md-input-container flex="50" class="mobile-input">
+          <label>{{'username'|translate}}</label>
+          <input name="username" ng-model="$ctrl.data.username" required>
+          <div ng-messages="signupForm.username.$error">
+            <div ng-messages-include="my-custom-messages"></div>
+          </div>
+        </md-input-container>
+        <md-input-container flex="50" class="mobile-input">
+          <label>{{'e_mail'|translate}}</label>
+          <input name="email" ng-model="$ctrl.data.email" type="email" required>
+          <div ng-messages="signupForm.email.$error">
+            <div ng-messages-include="my-custom-messages"></div>
+          </div>
+        </md-input-container>
+        <md-input-container flex="50" class="mobile-input">
+          <label>{{'password'|translate}}</label>
+          <input minlength="6" name="password" type="password" ng-model="$ctrl.data.password" required ng-pattern="/^(?:[0-9]+[a-z]|[a-z]+[0-9])[a-z0-9]*$/i">
+          <div ng-messages="signupForm.password.$error">
+            <div ng-messages-include="my-custom-messages"></div>
+            <div ng-show="signupForm.password.$invalid && signupForm.password.$dirty" ng-hide="signupForm.password.$valid" class="md-input-message-animation ng-binding ng-scope">{{'should_include_letter_number'|translate}}</div>
+          </div>
+        </md-input-container>
+        <md-input-container flex="50" class="mobile-input">
+          <label>{{'password_confirm'|translate}}</label>
+          <input match-password="password" type="password" name="confirm_password" ng-model="$ctrl.data.password_confirm" required compare-to="$ctrl.data.password">
+          <div ng-messages="signupForm.confirm_password.$error">
+            <div ng-messages-include="my-custom-messages"></div>
+          </div>
+        </md-input-container>
+
+        <md-input-container flex="50" class="mobile-input">
+          <label>{{'language'|translate}}</label>
+          <md-select ng-model="$ctrl.data.language">
+            <md-option ng-repeat="state in $ctrl.languages" ng-value="state.id">
+              {{state.name}}
+            </md-option>
+          </md-select>
+        </md-input-container>
+        <md-input-container flex="50" class="mobile-input">
+          <label>{{'sex'|translate}}</label>
+          <md-select ng-model="$ctrl.data.sex">
+            <md-option ng-repeat="gender in $ctrl.genders" ng-value="gender.value">
+              {{gender.name}}
+            </md-option>
+          </md-select>
+        </md-input-container>
+      </div>
+      <md-button type="submit" class="md-raised login-button-color">{{'sign_up'|translate}}</md-button>
+    </form>
+    <div layout="row" layout-align="space-between" layout-wrap class="signup-button-group">
+      <md-button type="button" ui-sref="auth.login">{{'already_have_an_account'|translate}}</md-button>
+      <md-button type="button" class="md-raised login-button-color" ng-click="$ctrl.signupFacebook()">{{'sign_up_with_facebook'|translate}}</md-button>
+    </div>
+  </div>
+</md-content>
+<script type="text/ng-template" id="my-custom-messages">
+  <div ng-message="required">{{'this_field_is_required'|translate}}</div>
+  <div ng-message="email">{{'email_address_in_not_valid'|translate}}</div>
+  <div ng-message="passwordMatch">{{'passwords_don_t_match'|translate}}</div>
+  <div ng-message="minlength">{{'this_field_is_too_short'|translate}}</div>
+</script>

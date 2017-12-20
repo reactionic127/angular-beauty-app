@@ -1,0 +1,60 @@
+@import "../../scss/colors";
+
+.login-component {
+  background: $purple;
+  .errors {
+    text-align: center;
+    list-style-type: none;
+    color: rgb(221, 44, 0);
+    padding: 0;
+    margin: 0 0 10px;
+    li:first-letter {
+      text-transform: capitalize;
+    }
+  }
+
+  .login-logo {
+    margin: auto auto 20px;
+    display: flex;
+    flex-shrink: 0;
+    img {
+      width: 150px;
+      height: 150px;
+    }
+  }
+
+  .login-form {
+    background: #ffffff;
+    margin: 0 auto auto;
+    width: 100%;
+    max-width: 500px;
+  }
+  .login-button-color {
+    background: $purple;
+    color: $white;
+    &:hover {
+      background-color: $purple !important;
+      color: $white;
+    }
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .login-component {
+    .login-logo {
+      margin-top: 50px;
+      img {
+        width: 100px;
+        height: 100px;
+      }
+    }
+    .login-form {
+      margin-top: 30px;
+      margin-bottom: 30px;
+    }
+    .login-button-group {
+      display: flex;
+      justify-content: center;
+    }
+  }
+}

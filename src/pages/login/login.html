@@ -1,0 +1,23 @@
+<md-content layout-fill="" class="login-component" layout="column" layout-align="start center" layout-padding>
+  <a ui-sref="app" href="" class="login-logo"><img src="/images/logo.png" alt=""></a>
+  <div class="login-form" layout-padding="" md-whiteframe="2">
+    <ul ng-if="$ctrl.error" class="errors">
+      <li>{{$ctrl.error}}</li>
+    </ul>
+    <form ng-submit="$ctrl.process()" layout="column">
+      <md-input-container>
+        <label>{{'email'|translate}}</label>
+        <input ng-model="$ctrl.data.email">
+      </md-input-container>
+      <md-input-container>
+        <label>{{'password'|translate}}</label>
+        <input type="password" ng-model="$ctrl.data.password">
+      </md-input-container>
+      <md-button type="submit" class="md-raised login-button-color">{{'sign_in'|translate}}</md-button>
+    </form>
+    <div layout="row" layout-align="space-between" layout-wrap class="login-button-group">
+      <md-button ui-sref="auth.signup" href="">{{'join_as_a_beautician'|translate}}</md-button>
+      <md-button ng-click="$ctrl.loginFacebook()">{{'sign_in_with_facebook'|translate}}</md-button>
+    </div>
+  </div>
+</md-content>

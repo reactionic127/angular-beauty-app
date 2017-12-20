@@ -1,0 +1,58 @@
+@import "~angular-material/angular-material.scss";
+@import "~sweetalert/lib/sweet-alert";
+@import "./scss/colors";
+@import url("https://fonts.googleapis.com/icon?family=Material+Icons");
+
+
+.main-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+  flex: 1;
+}
+
+app, ui-view, services, profile, payments, login, signup {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  min-height: 100vh;
+}
+login, signup {
+  & > md-content {
+    min-height: 100vh!important;
+  }
+}
+
+[ui-sref] {
+  cursor: pointer;
+}
+
+html body {
+  width: 100% !important;
+  overflow-x: hidden;
+}
+
+@media screen and (max-width: 767px) {
+  h1 {
+    font-size: 18px;
+  }
+  .mobile-md-menu {
+    display: none;
+  }
+  .main-container {
+    text-align: center;
+  }
+  .mobile-card-view {
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+  }
+  .mobile-footer {
+    font-size: 10px;
+  }
+  .footer {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+  }
+}

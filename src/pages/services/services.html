@@ -1,0 +1,44 @@
+<beauty-header></beauty-header>
+<div class="main-container" md-whiteframe="2">
+  <main class="services">
+    <md-tabs>
+      <md-tab label="{{category.name}}" ng-repeat="category in $ctrl.categories track by category.id">
+        <h3 ng-if="category.sub_categories.length == 0">{{'no_sub_categories_text'|translate}}</h3>
+        <div ng-if="category.sub_categories.length != 0">
+
+
+          <!-- exact table from live demo -->
+          <md-table-container>
+            <table md-table>
+              <thead md-head>
+              <tr md-row>
+                <th md-column>{{'name'|translate}}</th>
+                <th md-column>{{'price'|translate}}</th>
+                <th md-column>{{'actions'|translate}}</th>
+              </tr>
+              </thead>
+              <tbody md-body>
+              <tr md-row ng-repeat="cat in category.sub_categories track by cat.id">
+                <td md-cell>{{cat.name}}</td>
+                <td md-cell>{{$ctrl.existService(cat.name)}}</td>
+                <td md-cell>
+                  <div ng-if="$ctrl.existService(cat.name)">
+                    <md-button class="md-icon-button" ng-click="$ctrl.edit($event, cat)"><md-icon>mode_edit</md-icon></md-button>
+                    <md-button ng-click="$ctrl.deleteService(cat)" class="md-icon-button"><md-icon>delete</md-icon></md-button>
+                  </div>
+                  <div ng-if="!$ctrl.existService(cat.name)">
+                    <md-button class="md-icon-button md-primary" ng-click="$ctrl.create($event, cat)"><md-icon>add</md-icon></md-button>
+                  </div>
+                </td>
+              </tr>
+              </tbody>
+            </table>
+          </md-table-container>
+
+        </div>
+      </md-tab>
+    </md-tabs>
+  </main>
+</div>
+
+<beauty-footer></beauty-footer>

@@ -1,0 +1,71 @@
+$black: #000;
+$white:#fff;
+$dark-blue:#3b579d;
+$purple:#c88491;
+$purple-tab-item:darken(desaturate(adjust-hue($purple, 0.0285), 2.4455), 13.9216);
+$purple-tab-item-active:darken(desaturate(adjust-hue($purple, 0.0936), 2.6953), 28.2353);
+$dark-gray: #3E3E3E;
+$gray:#b3b3b3;
+$blue:#147dfa;
+$red: #ff0000;
+$green:#7ecc02;
+$dart-green: #3a8e1b;
+$star-gold-color:#ffd203;
+$star-hollow-color:#381d6f;
+$base-background-color: #F0F0F0;
+$royal: $purple;
+
+.global-button-color {
+  background: $purple !important;
+  color: $white !important;
+  &:hover {
+    background-color: $purple !important;
+    color: $white;
+  }
+}
+md-tabs.md-default-theme .md-tab.md-active, md-tabs .md-tab.md-active, md-tabs.md-default-theme .md-tab.md-active md-icon, md-tabs .md-tab.md-active md-icon, md-tabs.md-default-theme .md-tab.md-focused, md-tabs .md-tab.md-focused, md-tabs.md-default-theme .md-tab.md-focused md-icon, md-tabs .md-tab.md-focused md-icon {
+  color: $purple;
+  border-bottom: 1px solid $purple !important;
+}
+
+md-tabs.md-default-theme .md-tab.md-active, md-tabs .md-tab.md-active md-icon, md-tabs.md-default-theme .md-tab.md-focused, md-tabs .md-tab.md-focused, md-tabs.md-default-theme .md-tab.md-focused md-icon, md-tabs .md-tab.md-focused md-icon {
+  color: $purple;
+  border-bottom: 1px solid $purple !important;
+}
+
+.md-tab.md-active .md-tab.md-focused {
+  border-bottom: 1px solid $purple !important;
+}
+
+md-tabs.md-default-theme md-ink-bar, md-tabs md-ink-bar {
+  color: $purple;
+  background: $purple;
+}
+
+md-input-container label{
+  color: $purple !important;
+}
+
+md-input-container.md-input-focused label{
+  color: $purple !important;
+}
+
+md-input-container.md-input-focused input{
+  border-bottom: 1px solid $purple !important;
+}
+
+md-input-container.md-input-focused textarea{
+  border-bottom: 1px solid $purple !important;
+}
+
+md-input-container.md-input-focused md-select-value{
+  border-bottom: 1px solid $purple !important;
+}
+
+md-input-container.md-input-focused md-option{
+  color: $purple !important;
+}
+
+md-toolbar.md-default-theme:not(.md-menu-toolbar), md-toolbar:not(.md-menu-toolbar) {
+  background-color: $purple !important;
+}

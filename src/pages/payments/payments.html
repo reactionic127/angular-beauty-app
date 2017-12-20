@@ -1,0 +1,49 @@
+<beauty-header></beauty-header>
+<div class="main-container" md-whiteframe="2">
+  <main class="payments">
+    <md-tabs>
+      <md-tab label="{{'payments_received'|translate}}">
+        <md-table-container>
+
+          <table md-table>
+            <thead md-head>
+            <tr md-row>
+              <th md-column>{{'date'|translate}}</th>
+              <th md-column>{{'name_of_booker'|translate}}</th>
+              <th md-column>{{'amount'|translate}}</th>
+            </tr>
+            </thead>
+            <tbody md-body>
+            <tr md-row ng-repeat="row in $ctrl.payments">
+              <td md-cell>{{row.paid_at|date:'dd-MM-yyyy HH:mm'}}</td>
+              <td md-cell>{{row.user_name}}</td>
+              <td md-cell>{{row.amount|currency}}</td>
+            </tr>
+            </tbody>
+          </table>
+        </md-table-container>
+      </md-tab>
+      <md-tab label="{{'pending_payments'|translate}}">
+        <md-table-container>
+
+          <table md-table>
+            <thead md-head>
+            <tr md-row>
+              <th md-column>{{'name_of_booker'|translate}}</th>
+              <th md-column>{{'amount'|translate}}</th>
+            </tr>
+            </thead>
+            <tbody md-body>
+            <tr md-row ng-repeat="row in $ctrl.bookings">
+              <td md-cell>{{row.user.name}} {{row.user.surname}}</td>
+              <td md-cell>{{row.price|currency}}</td>
+            </tr>
+            </tbody>
+          </table>
+        </md-table-container>
+      </md-tab>
+    </md-tabs>
+  </main>
+</div>
+
+<beauty-footer></beauty-footer>

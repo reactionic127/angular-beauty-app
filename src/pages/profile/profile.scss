@@ -1,0 +1,61 @@
+@import "../../scss/colors";
+
+.profile {
+  .errors {
+    list-style-type: none;
+    color: rgb(221, 44, 0);
+    padding: 0;
+    margin: 10px 0;
+    li:first-letter {
+      text-transform: capitalize;
+    }
+  }
+  .user-photo {
+    .change-photo-block {
+      .photo-container {
+        overflow: hidden;
+        border-radius: 50%;
+        margin-right: 10px;
+        height: 70px;
+        width: 70px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        img {
+          width: 100%;
+        }
+      }
+      flex: initial;
+    }
+
+    .photo-buttons {
+      input {
+        display: none;
+      }
+    }
+  }
+  fieldset {
+    border:1px solid $gray;
+    legend   {
+      color: darken($gray, 20%);
+    }
+  }
+  @media screen and (max-width: 767px) {
+    display: block;
+    width: 100%;
+    fieldset {
+      flex: 1 1 100%;
+      max-width: 100% !important;
+      max-height: 100%;
+      box-sizing: border-box;
+      margin-top: 30px;
+    }
+    .mobile-margin {
+      margin-top: 30px;
+    }
+    .mobile-font {
+      font-size: 12px;
+    }
+  }
+}

@@ -1,0 +1,37 @@
+<beauty-header></beauty-header>
+<div class="main-container">
+  <main class="main" ng-if="!$ctrl.user">
+    <h1>{{'welcome_to_beauty_app'|translate}}</h1>
+    <div layout="row" layout-wrap="" class="mobile-card-view">
+    <div md-whiteframe="2" md-ink-ripple="#c88491" ui-sref="auth.login" class="button-card">
+      <md-icon>people</md-icon>
+      <h2>{{'sign_in'|translate}}</h2>
+    </div>
+    <div md-whiteframe="2" md-ink-ripple="#c88491" ui-sref="auth.signup" class="button-card">
+      <md-icon>group_add</md-icon>
+      <h2>{{'join_as_a_beautician'|translate}}</h2>
+    </div>
+      </div>
+  </main>
+  <main class="main" ng-if="$ctrl.user">
+    <h1>{{'welcome_to_beauty_app'|translate}}</h1>
+    <div layout="row" layout-wrap="" class="mobile-card-view">
+      <div md-whiteframe="2" md-ink-ripple="#c88491" ui-sref="dashboard.profile" class="button-card">
+        <md-icon>settings</md-icon>
+        <h2>{{'profile_settings'|translate}}</h2>
+        <p>{{'main_profile_settings_label'|translate}}</p>
+      </div>
+      <div md-whiteframe="2" md-ink-ripple="#c88491" ui-sref="dashboard.payments" class="button-card">
+        <md-icon>payment</md-icon>
+        <h2>{{'payment'|translate}}</h2>
+        <p>{{'payment_history'|translate}}</p>
+      </div>
+      <div md-whiteframe="2" md-ink-ripple="#c88491" ui-sref="dashboard.services" class="button-card">
+        <md-icon>format_list_numbered</md-icon>
+        <h2>{{'services'|translate}}</h2>
+        <p>{{'configure_services'|translate}}</p>
+      </div>
+    </div>
+  </main>
+</div>
+<beauty-footer></beauty-footer>

@@ -1,0 +1,221 @@
+<script type="text/ng-template" id="error-messages.html">
+  <div ng-message="required">{{'this_field_is_required'|translate}}</div>
+  <div ng-message="minlength">{{'this_field_is_too_short'|translate}}</div>
+  <div ng-message="pattern">{{'field_is_invalid_format'|translate}}</div>
+  <div ng-message="number">{{'field_is_invalid_format'|translate}}</div>
+</script>
+<beauty-header></beauty-header>
+<div class="main-container" md-whiteframe="2">
+  <div class="profile" layout-padding layout="row" layout-align="space-between start">
+    <div class="user-photo" flex="100" flex-gt-sm="25" layout="column">
+      <div class="change-photo-block" flex="100" layout="row" layout-align="center center">
+        <div class="photo-container" md-whiteframe="2">
+          <img ng-src="{{$ctrl.user.profile_picture?$ctrl.user.profile_picture.s70:'/images/no_avatar.jpg'}}" alt="">
+        </div>
+        <div class="photo-buttons">
+          <md-button ng-click="$ctrl.selectPhoto($event)" class="md-raised global-button-color mobile-font">{{'change_photo'|translate}}</md-button>
+          <input ng-model="$ctrl.newPhoto" onchange="angular.element(this).scope().$ctrl.changePhoto(event)" type="file"
+                 name="user_photo" id="user_photo">
+        </div>
+      </div>
+      <div layout-padding layout="column">
+        <md-button ng-click="$ctrl.deleteAccount()" class="md-raised global-button-color mobile-font">{{'delete_account'|translate}}</md-button>
+      </div>
+    </div>
+    <div class="user-form" flex="100" flex-gt-sm="75">
+      <md-tabs md-selected="3" md-dynamic-height md-border-bottom>
+        <md-tab label="{{'details'|translate}}">
+          <p>{{'username'|translate}}: {{$ctrl.user.username}}</p>
+          <p>{{'name'|translate}}: {{$ctrl.user.name}} {{$ctrl.user.surname}} </p>
+          <p>{{'e_mail'|translate}}: {{$ctrl.user.email}} </p>
+          <hr>
+          <form name="userDataForm" ng-submit="$ctrl.saveProfile(userDataForm)">
+            <md-input-container class="md-block">
+              <label>{{'phone_number'|translate}}</label>
+              <input ng-model="$ctrl.user.phone_number" type="text" name="phone" placeholder=""
+                     ng-pattern="/^(?:(?:((?:00|\+)([1-4]\d\d|[1-9]\d?))?)?[-.\ \/]?)?((?:(\d{1,})?[-.\ \/]?){0,})(?:[-.\ \/]?(?:#|ext.?|extension|x)[-.\ \/]?(\d+))?$/"/>
+              <div ng-messages="userDataForm.phone.$error">
+                <ng-message when="pattern">{{'wrong_phone_number_format'|translate}}</ng-message>
+              </div>
+            </md-input-container>
+            <md-input-container class="md-block">
+              <label>{{'bio'|translate}}</label>
+              <textarea ng-model="$ctrl.user.bio"></textarea>
+            </md-input-container>
+            <md-button type="submit" class="md-raised global-button-color">{{'save_profile'|translate}}</md-button>
+          </form>
+        </md-tab>
+
+        <md-tab label="{{'address'|translate}}">
+          <form name="addressForm" novalidate>
+            <md-input-container class="md-block">
+              <label>{{'street'|translate}}</label>
+              <input type="text"
+                     name="street"
+                     required
+                     ng-model="$ctrl.address.street"
+                     ng-pattern="/\w*[a-zA-Z]\w*/">
+              <div ng-show="addressForm.street.$dirty" ng-messages="addressForm.street.$error">
+                <ng-message when="required">{{'street_is_required'|translate}}</ng-message>
+                <ng-message when="pattern">{{'street_pattern'|translate}}</ng-message>
+              </div>
+            </md-input-container>
+
+            <md-input-container class="md-block">
+              <label>{{'postcode'|translate}}</label>
+              <input type="text"
+                     name="postcode"
+                     required
+                     ng-model="$ctrl.address.postcode"
+                     ng-pattern="/^[0-9]+$/">
+              <div ng-show="addressForm.postcode.$dirty" ng-messages="addressForm.postcode.$error">
+                <ng-message when="required">{{'postcode_is_required'|translate}}</ng-message>
+                <ng-message when="pattern">{{'postcode_pattern'|translate}}</ng-message>
+              </div>
+            </md-input-container>
+
+            <md-input-container class="md-block">
+              <label>{{'city'|translate}}</label>
+              <input type="text"
+                     name="city"
+                     required
+                     ng-model="$ctrl.address.city">
+              <div ng-show="addressForm.city.$dirty" ng-messages="addressForm.city.$error">
+                <ng-message when="required">{{'city_is_required'|translate}}</ng-message>
+              </div>
+            </md-input-container>
+
+            <md-input-container class="md-block">
+              <label>{{'state'|translate}}</label>
+              <input type="text"
+                     name="state"
+                     ng-model="$ctrl.address.state">
+            </md-input-container>
+
+            <md-input-container class="md-block">
+              <label>{{'country'|translate}}</label>
+              <input type="text"
+                     name="country"
+                     required
+                     ng-model="$ctrl.address.country">
+              <div ng-show="addressForm.street.$dirty" ng-messages="addressForm.street.$error">
+                <ng-message when="required">{{'country_is_required'|translate}}</ng-message>
+              </div>
+            </md-input-container>
+
+            <md-button type="submit"
+                       class="md-raised global-button-color"
+                       ng-click="addressForm.$valid && $ctrl.saveAddress($ctrl.address)">{{'save_address'|translate}}</md-button>
+          </form>
+        </md-tab>
+
+        <md-tab label="{{'change_password'|translate}}">
+          <ul class="errors">
+            <li ng-repeat="v in $ctrl.passwordErrors">
+              {{v}}
+            </li>
+          </ul>
+          <form name="passwordForm" ng-submit="$ctrl.savePassword(passwordForm)">
+            <md-input-container class="md-block">
+              <label>{{'current_password'|translate}}</label>
+              <input type="password" required name="current_password" ng-model="$ctrl.password.current_password">
+              <div ng-messages="passwordForm.current_password.$error">
+                <ng-message when="required">{{'current_password_is_required'|translate}}</ng-message>
+              </div>
+            </md-input-container>
+            <md-input-container class="md-block">
+              <label>{{'new_password'|translate}}</label>
+              <input minlength="6" type="password" required name="password" ng-model="$ctrl.password.password">
+              <div ng-messages="passwordForm.password.$error">
+                <ng-message when="required">{{'new_password_is_required'|translate}}</ng-message>
+                <ng-message when="minlength">{{'password_is_too_small'|translate}}</ng-message>
+              </div>
+            </md-input-container>
+            <md-input-container class="md-block">
+              <label>{{'password_confirm'|translate}}</label>
+              <input match-password="password" type="password" required name="confirm_password"
+                     ng-model="$ctrl.password.confirm_password">
+              <div ng-messages="passwordForm.confirm_password.$error">
+                <ng-message when="passwordMatch">{{'passwords_don_t_match'|translate}}</ng-message>
+              </div>
+            </md-input-container>
+            <md-button type="submit" class="md-raised global-button-color">{{'change_password'|translate}}</md-button>
+          </form>
+        </md-tab>
+        <md-tab label="{{'bank_account'|translate}}">
+          <form name="bankForm" ng-submit="$ctrl.saveBank(bankForm)">
+            <md-input-container class="md-block">
+              <label>{{'name_of_account_holder'|translate}}</label>
+              <input type="text" ng-model="$ctrl.bank.account_holder_name" name="holder_name" required>
+              <div ng-messages="bankForm.holder_name.$error">
+                <div ng-messages-include="error-messages.html"></div>
+              </div>
+            </md-input-container>
+            <div layout="row">
+              <md-button class="md-raised global-button-color mobile-font" ng-class="$ctrl.bankAccountType == 'account_details'?'md-accent':'md-primary'" ng-click="$ctrl.bankAccountType = 'account_details'">Use account details</md-button>
+              <md-button class="md-raised global-button-color mobile-font" ng-class="$ctrl.bankAccountType == 'bic'?'md-accent':'md-primary'" ng-click="$ctrl.bankAccountType = 'bic'">Use BIC and IBAN</md-button>
+            </div>
+            <div layout="row">
+              <fieldset flex="50" ng-if="$ctrl.bankAccountType == 'account_details'">
+                <legend>{{'account_details'|translate}}</legend>
+
+                <md-input-container class="md-block">
+                  <label>{{'bank_code'|translate}}</label>
+                  <input type="number" ng-pattern="/^[0-9]+$/" ng-model="$ctrl.bank.bank_code" name="bank_code" required>
+                  <div ng-messages="bankForm.bank_code.$error">
+                    <div ng-messages-include="error-messages.html"></div>
+                  </div>
+                </md-input-container>
+                <md-input-container class="md-block">
+                  <label>{{'branch_number'|translate}}</label>
+                  <input type="number" ng-pattern="/^[0-9]+$/" ng-model="$ctrl.bank.branch_number" name="branch_number" required>
+                  <div ng-messages="bankForm.branch_number.$error">
+                    <div ng-messages-include="error-messages.html"></div>
+                  </div>
+                </md-input-container>
+                <md-input-container class="md-block">
+                  <label>{{'account_number'|translate}}</label>
+                  <input type="text" ng-model="$ctrl.bank.account_number" name="account_number" required>
+                  <div ng-messages="bankForm.account_number.$error">
+                    <div ng-messages-include="error-messages.html"></div>
+                  </div>
+                </md-input-container>
+                <md-input-container class="md-block">
+                  <label>{{'rib_key'|translate}}</label>
+                  <input type="number" ng-pattern="/^[0-9]+$/" ng-model="$ctrl.bank.rib_key" name="rib_key" required>
+                  <div ng-messages="bankForm.rib_key.$error">
+                    <div ng-messages-include="error-messages.html"></div>
+                  </div>
+                </md-input-container>
+              </fieldset>
+              <fieldset flex="50" ng-if="$ctrl.bankAccountType == 'bic'">
+                <legend>{{'bank_account_else'|translate}}</legend>
+
+                <md-input-container class="md-block">
+                  <label>{{'iban'|translate}} </label>
+                  <input type="number" ng-pattern="/^[0-9]+$/" ng-model="$ctrl.bank.iban" name="iban" required>
+                  <div ng-messages="bankForm.iban.$error">
+                    <div ng-messages-include="error-messages.html"></div>
+                  </div>
+                </md-input-container>
+                <md-input-container class="md-block">
+                  <label>{{'bic'|translate}}</label>
+                  <input type="number" ng-pattern="/^[0-9]+$/" ng-model="$ctrl.bank.bic" name="bic" required>
+                  <div ng-messages="bankForm.bic.$error">
+                    <div ng-messages-include="error-messages.html"></div>
+                  </div>
+                </md-input-container>
+              </fieldset>
+            </div>
+            <md-button class="md-raised global-button-color mobile-margin" type="submit">{{'save'|translate}}</md-button>
+          </form>
+
+        </md-tab>
+      </md-tabs>
+    </div>
+  </div>
+
+</div>
+
+
+<beauty-footer></beauty-footer>

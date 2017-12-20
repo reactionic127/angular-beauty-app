@@ -1,0 +1,15 @@
+@import "../../scss/colors";
+
+.services {
+  .md-icon-button.md-primary {
+    background: transparentize($purple, .5);
+    &:hover {
+      md-icon {
+        color: $purple;
+      }
+    }
+    md-icon {
+      color: #ffffff;
+    }
+  }
+}

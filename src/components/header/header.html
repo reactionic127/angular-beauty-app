@@ -1,0 +1,52 @@
+<md-toolbar class="header-bar">
+
+  <div class="md-toolbar-tools">
+    <span ui-sref="app">BeautyApp</span>
+
+    <div ng-if="$ctrl.user" class="mobile-md-menu">
+
+      <md-button ui-sref="dashboard.payments">
+        {{'payments'|translate}}
+      </md-button>
+      <md-button ui-sref="dashboard.services">
+        {{'services'|translate}}
+      </md-button>
+    </div>
+    <!-- fill up the space between left and right area -->
+    <span flex></span>
+    <md-input-container class="header-language">
+      <md-select ng-change="$ctrl.changeLanguage()" ng-model="$ctrl.language" placeholder="Select language">
+        <md-option ng-value="opt.value" ng-repeat="opt in $ctrl.languages track by opt.id">{{ opt.name }}</md-option>
+      </md-select>
+    </md-input-container>
+    <div ng-if="!$ctrl.user" class="mobile-md-menu">
+
+      <md-button ui-sref="auth.login">
+        {{'sign_in'|translate}}
+      </md-button>
+      <md-button ui-sref="auth.signup">
+        {{'join_as_a_beautician'|translate}}
+      </md-button>
+    </div>
+    <md-menu ng-if="$ctrl.user" class="mobile-md-menu">
+      <div class="user-block" layout="row" layout-align="end center"  ng-click="$ctrl.openMenu($mdOpenMenu, $event)">
+
+        <div class="user-name">{{$ctrl.user.name}} {{$ctrl.user.surname}}</div>
+        <div class="user-photo" md-menu-origin><img ng-src="{{$ctrl.user.profile_picture?$ctrl.user.profile_picture.s70:'/images/no_avatar.jpg'}}" alt=""></div>
+      </div>
+      <md-menu-content width="4">
+        <md-menu-item>
+          <md-button ui-sref="dashboard.profile">
+            {{'edit_profile'|translate}}
+          </md-button>
+        </md-menu-item>
+        <md-menu-item>
+          <md-button ng-click="$ctrl.logout()">
+            {{'logout'|translate}}
+          </md-button>
+        </md-menu-item>
+      </md-menu-content>
+    </md-menu>
+  </div>
+
+</md-toolbar>
